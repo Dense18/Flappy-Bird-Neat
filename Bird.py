@@ -19,10 +19,10 @@ class Bird:
 
         self.gravity = 0.5
         self.velocity = velocity
-        self.maxVelocity = 8
-        self.minVelocity = -6.5
+        self.maxVelocity = 9
+        self.minVelocity = -7.5
         self.airResistance = 1
-        self.lift = 12
+        self.lift = 13
 
         self.clicked = False
 
@@ -30,7 +30,7 @@ class Bird:
     def update(self):
         #gravity
         # self.velocity = min(self.velocity + 0.3, self.maxVelocity)
-        print(self.velocity)
+        # print(self.velocity)
 
         self.velocity += self.gravity
         self.velocity *= self.airResistance
