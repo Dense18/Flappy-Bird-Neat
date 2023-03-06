@@ -1,6 +1,9 @@
 from FlappyBirdGame import FlappyBirdGame
+from FlappyBirdGameAI import FlappyBirdGameAI
 import pygame
 from settings import *
+import os
+import neat
 
 def main():
     pygame.init()
