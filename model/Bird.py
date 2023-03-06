@@ -5,7 +5,7 @@ import os
     Bird object for handling bird positions and movements
 """
 class Bird:
-    def __init__(self, x, y, width = 0, height = 0, velocity = 0) -> None:
+    def __init__(self, x, y, width = 0, height = 0, velocity = 0, center = True) -> None:
         self.x = x
         self.y = y
 
@@ -16,6 +16,10 @@ class Bird:
 
         self.width = self.imgWidth
         self.height = self.imgHeight
+
+        if center:
+            self.x -= self.width//2
+            self.y -= self.height//2
 
         self.gravity = 0.5
         self.velocity = velocity
@@ -28,9 +32,6 @@ class Bird:
 
     
     def update(self):
-        #gravity
-        # self.velocity = min(self.velocity + 0.3, self.maxVelocity)
-        # print(self.velocity)
 
         self.velocity += self.gravity
         self.velocity *= self.airResistance
@@ -43,20 +44,13 @@ class Bird:
         ##Change this so it is not bound
         if self.y + self.height > BACKGROUND_HEIGHT:
             # self.y += self.velocity
-            self.y = BACKGROUND_HEIGHT - self.height
+            return
         
         if self.y < 0:
-            self.y = 0
+            return
+            # self.y = 0
 
         self.y += self.velocity
-
-        ## Jump
-        if pygame.mouse.get_pressed()[0] == 1 and self.clicked == False:
-            self.jump()
-            self.clicked = True
-        
-        if pygame.mouse.get_pressed()[0] == 0:
-            self.clicked = False
 
         self.birdIndex = (self.birdIndex + 1) % len(self.birdImgList)
         self.currentImg = self.birdImgList[self.birdIndex]

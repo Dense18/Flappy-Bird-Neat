@@ -2,7 +2,7 @@ import pygame
 import os
 from settings import *
 import random
-from Bird import Bird
+from model.Bird import Bird
 
 """
     Class object handling Pipe positions and collisions
@@ -22,7 +22,7 @@ class Pipe:
         self.passed = False
 
     def setRandomHeight(self):
-        self.height = random.randrange(int(SCREEN_HEIGHT * 0.12), BACKGROUND_HEIGHT - self.gap - int(SCREEN_HEIGHT * 0.12))
+        self.height = random.randrange(int(SCREEN_HEIGHT * 0.18), BACKGROUND_HEIGHT - self.gap - int(SCREEN_HEIGHT * 0.18))
         self.top = self.height - self.topImg.get_height()
         self.bottom = self.height + self.gap
 
