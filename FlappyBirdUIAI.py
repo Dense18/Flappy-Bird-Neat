@@ -4,6 +4,9 @@ from settings import *
 import math
 
 class FlappyBirdUIAI:
+    """
+        UI class for the Flappy Bird game AI training
+    """
     def __init__(self, game) -> None:
         self.game = game
 
