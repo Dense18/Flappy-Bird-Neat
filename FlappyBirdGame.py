@@ -46,6 +46,10 @@ class FlappyBirdGame:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 self.start = True
                 self.bird.jump()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_a:
+                    self.start = True
+                    self.bird.jump()
 
     def update(self, events):
         if self.start:
@@ -93,3 +97,4 @@ class FlappyBirdGame:
         self.isRunning = True
         self.start = False
         self.gameOver = False
+        self.score = 0
