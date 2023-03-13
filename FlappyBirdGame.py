@@ -86,4 +86,10 @@ class FlappyBirdGame:
             self.clock.tick(60)
     
     def reset(self):
-        self.__init__(self.screen)
+        # self.__init__(self.screen)
+        self.bird = Bird(self.screen.get_width()//2, self.screen.get_height()//2)
+        self.pipeList = [Pipe(self.screen.get_width())]
+
+        self.isRunning = True
+        self.start = False
+        self.gameOver = False

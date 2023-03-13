@@ -23,16 +23,12 @@ class FlappyBirdGameAI(FlappyBirdGame):
         self.pipeInd = 0
         self.start = True
 
-        # self.nets = []
-        # self.birdList = []
-        # self.genomes = []
         self.isTraining = True
 
         self.setUpNeatConfig()
 
     def run(self, genomes, config):
         self.generation += 1
-        ## Add initial configuration to the game
         for id, genome in genomes:
             genome.fitness = 0
             net = neat.nn.FeedForwardNetwork.create(genome, config)
@@ -53,9 +49,9 @@ class FlappyBirdGameAI(FlappyBirdGame):
 
         self.__init__(self.screen)
 
+
         self.generation = gen
         self.toDraw = toDraw
-        self.start = True
         self.isRunning = isRunning
 
     def loop(self):
@@ -78,7 +74,7 @@ class FlappyBirdGameAI(FlappyBirdGame):
         self.updatePipes()
         self.removeOutOfBoundBirds()
 
-        if self.isTraining and self.score > 200:
+        if self.isTraining and self.score > 8000:
             self.isRunning = False
 
     ## Override Method
@@ -146,17 +142,24 @@ class FlappyBirdGameAI(FlappyBirdGame):
         birdX = self.birdList[0].x
         distanceList = [pipe.x + pipe.width - birdX for pipe in self.pipeList]  #Calculate the x distance between the bird and each pipe
         return distanceList.index(min(i for i in distanceList if i >= 0))
+    
     """""""""""""""""""""""""""""
-             Test Ai
+             AI functions
     """""""""""""""""""""""""""""
 
     def evalGenomes(self, genomes, config):
+        """
+            Function used to evaluated each generation of the Neat algorithm
+        """
         self.nets = []
         self.birdList = []
         self.genomes = []
         self.run(genomes, config)
         
     def runNeat(self, config):
+        """
+            Run NEAT algorithm based on the [config] file
+        """
         p = neat.Population(config)
 
         ## Print out the statistics of the neat progress to the terminal
@@ -171,15 +174,24 @@ class FlappyBirdGameAI(FlappyBirdGame):
             pickle.dump(winner, f)
     
     def trainAI(self):
+        """
+            Train a new AI using NEAT algorithm
+        """
         self.runNeat(self.config)
     
     def testGenome(self, file):
+        """
+            Test a genome from the specific [file] onto the game
+        """
         with open(file, "rb") as f:
             bestGenome = pickle.load(f)
         bestNet = neat.nn.FeedForwardNetwork.create(bestGenome, self.config)
         self.testAI(bestNet)
     
     def testAI(self, net):
+        """
+            Test a genome given a neural network [net]
+        """
         run = True
         self.birdList = []
         self.nets = []
@@ -193,6 +205,9 @@ class FlappyBirdGameAI(FlappyBirdGame):
 
     
     def setUpNeatConfig(self):
+        """
+            Sets up the configuration for NEAT
+        """
         localDir = os.path.dirname(__file__)
         configPath = os.path.join(localDir, "config-flappybird.txt")
         

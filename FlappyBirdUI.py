@@ -6,6 +6,9 @@ import math
 
 
 class FlappyBirdUI:
+    """
+        UI class for the normal Flappy Bird game
+    """
     def __init__(self, game) -> None:
         self.game = game
 
