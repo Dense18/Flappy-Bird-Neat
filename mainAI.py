@@ -4,15 +4,13 @@ from settings import *
 import sys
 
 def main():
-    args = sys.argv
-    print(args)
     isTrain = True
-    if len(args) == 1: 
+    if len(sys.argv) == 1: 
         isTrain = True
-    elif len(args) >= 2:
-        if args[1] == "-train": 
+    elif len(sys.argv) >= 2:
+        if sys.argv[1] == "-train": 
             isTrain = True
-        elif args[1] == "-test": 
+        elif sys.argv[1] == "-test": 
             isTrain = False
         else:
             print("Unknown parameters!\n Available option arguments are: -train, -test")
@@ -23,8 +21,6 @@ def main():
     
     game = FlappyBirdGameAI(screen)
     game.trainAI() if isTrain else game.testGenome("bestGenome.pickle")
-
-
 
 if __name__ == "__main__":
     main()
