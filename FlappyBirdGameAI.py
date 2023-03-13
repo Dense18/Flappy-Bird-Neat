@@ -199,7 +199,7 @@ class FlappyBirdGameAI(FlappyBirdGame):
         self.nets.append(net)
         self.isTraining = False
         while(run):
-            self.clock.tick(60)
+            # self.clock.tick(60)
             self.update()
             if self.toDraw: self.draw()
 
